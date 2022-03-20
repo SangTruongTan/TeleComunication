@@ -1,0 +1,1166 @@
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"ssd1306_tests.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.ssd1306_TestBorder,"ax",%progbits
+  18              		.align	1
+  19              		.global	ssd1306_TestBorder
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	ssd1306_TestBorder:
+  25              	.LFB75:
+  26              		.file 1 "Drivers/OLED/Src/ssd1306_tests.c"
+   1:Drivers/OLED/Src/ssd1306_tests.c **** #include <string.h>
+   2:Drivers/OLED/Src/ssd1306_tests.c **** #include <stdio.h>
+   3:Drivers/OLED/Src/ssd1306_tests.c **** #include "ssd1306.h"
+   4:Drivers/OLED/Src/ssd1306_tests.c **** #include "ssd1306_tests.h"
+   5:Drivers/OLED/Src/ssd1306_tests.c **** 
+   6:Drivers/OLED/Src/ssd1306_tests.c **** void ssd1306_TestBorder() {
+  27              		.loc 1 6 27 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 70B5     		push	{r4, r5, r6, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 16
+  34              		.cfi_offset 4, -16
+  35              		.cfi_offset 5, -12
+  36              		.cfi_offset 6, -8
+  37              		.cfi_offset 14, -4
+   7:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_Fill(Black);
+  38              		.loc 1 7 5 view .LVU1
+  39 0002 0020     		movs	r0, #0
+  40 0004 FFF7FEFF 		bl	ssd1306_Fill
+  41              	.LVL0:
+   8:Drivers/OLED/Src/ssd1306_tests.c ****    
+   9:Drivers/OLED/Src/ssd1306_tests.c ****     uint32_t start = HAL_GetTick();
+  42              		.loc 1 9 5 view .LVU2
+  43              		.loc 1 9 22 is_stmt 0 view .LVU3
+  44 0008 FFF7FEFF 		bl	HAL_GetTick
+  45              	.LVL1:
+  46 000c 0646     		mov	r6, r0
+  47              	.LVL2:
+  10:Drivers/OLED/Src/ssd1306_tests.c ****     uint32_t end = start;
+  48              		.loc 1 10 5 is_stmt 1 view .LVU4
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 2
+
+
+  11:Drivers/OLED/Src/ssd1306_tests.c ****     uint8_t x = 0;
+  49              		.loc 1 11 5 view .LVU5
+  12:Drivers/OLED/Src/ssd1306_tests.c ****     uint8_t y = 0;
+  50              		.loc 1 12 5 view .LVU6
+  51              		.loc 1 12 13 is_stmt 0 view .LVU7
+  52 000e 0024     		movs	r4, #0
+  11:Drivers/OLED/Src/ssd1306_tests.c ****     uint8_t x = 0;
+  53              		.loc 1 11 13 view .LVU8
+  54 0010 2546     		mov	r5, r4
+  55 0012 15E0     		b	.L6
+  56              	.LVL3:
+  57              	.L2:
+  13:Drivers/OLED/Src/ssd1306_tests.c ****     do {
+  14:Drivers/OLED/Src/ssd1306_tests.c ****         ssd1306_DrawPixel(x, y, Black);
+  15:Drivers/OLED/Src/ssd1306_tests.c **** 
+  16:Drivers/OLED/Src/ssd1306_tests.c ****         if((y == 0) && (x < 127))
+  17:Drivers/OLED/Src/ssd1306_tests.c ****             x++;
+  18:Drivers/OLED/Src/ssd1306_tests.c ****         else if((x == 127) && (y < (SSD1306_HEIGHT-1)))
+  58              		.loc 1 18 14 is_stmt 1 view .LVU9
+  59              		.loc 1 18 16 is_stmt 0 view .LVU10
+  60 0014 7F2D     		cmp	r5, #127
+  61 0016 1FD0     		beq	.L8
+  62              	.L4:
+  19:Drivers/OLED/Src/ssd1306_tests.c ****             y++;
+  20:Drivers/OLED/Src/ssd1306_tests.c ****         else if((y == (SSD1306_HEIGHT-1)) && (x > 0)) 
+  63              		.loc 1 20 14 is_stmt 1 view .LVU11
+  64              		.loc 1 20 16 is_stmt 0 view .LVU12
+  65 0018 3F2C     		cmp	r4, #63
+  66 001a 22D0     		beq	.L9
+  67              	.L5:
+  21:Drivers/OLED/Src/ssd1306_tests.c ****             x--;
+  22:Drivers/OLED/Src/ssd1306_tests.c ****         else
+  23:Drivers/OLED/Src/ssd1306_tests.c ****             y--;
+  68              		.loc 1 23 13 is_stmt 1 view .LVU13
+  69              		.loc 1 23 14 is_stmt 0 view .LVU14
+  70 001c 013C     		subs	r4, r4, #1
+  71              	.LVL4:
+  72              		.loc 1 23 14 view .LVU15
+  73 001e E4B2     		uxtb	r4, r4
+  74              	.LVL5:
+  75              	.L3:
+  24:Drivers/OLED/Src/ssd1306_tests.c **** 
+  25:Drivers/OLED/Src/ssd1306_tests.c ****         ssd1306_DrawPixel(x, y, White);
+  76              		.loc 1 25 9 is_stmt 1 view .LVU16
+  77 0020 0122     		movs	r2, #1
+  78 0022 2146     		mov	r1, r4
+  79 0024 2846     		mov	r0, r5
+  80 0026 FFF7FEFF 		bl	ssd1306_DrawPixel
+  81              	.LVL6:
+  26:Drivers/OLED/Src/ssd1306_tests.c ****         ssd1306_UpdateScreen();
+  82              		.loc 1 26 9 view .LVU17
+  83 002a FFF7FEFF 		bl	ssd1306_UpdateScreen
+  84              	.LVL7:
+  27:Drivers/OLED/Src/ssd1306_tests.c ****     
+  28:Drivers/OLED/Src/ssd1306_tests.c ****         HAL_Delay(5);
+  85              		.loc 1 28 9 view .LVU18
+  86 002e 0520     		movs	r0, #5
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 3
+
+
+  87 0030 FFF7FEFF 		bl	HAL_Delay
+  88              	.LVL8:
+  29:Drivers/OLED/Src/ssd1306_tests.c ****         end = HAL_GetTick();
+  89              		.loc 1 29 9 view .LVU19
+  90              		.loc 1 29 15 is_stmt 0 view .LVU20
+  91 0034 FFF7FEFF 		bl	HAL_GetTick
+  92              	.LVL9:
+  30:Drivers/OLED/Src/ssd1306_tests.c ****     } while((end - start) < 8000);
+  93              		.loc 1 30 12 is_stmt 1 view .LVU21
+  94              		.loc 1 30 18 is_stmt 0 view .LVU22
+  95 0038 801B     		subs	r0, r0, r6
+  96              	.LVL10:
+  97              		.loc 1 30 5 view .LVU23
+  98 003a B0F5FA5F 		cmp	r0, #8000
+  99 003e 15D2     		bcs	.L10
+ 100              	.LVL11:
+ 101              	.L6:
+  13:Drivers/OLED/Src/ssd1306_tests.c ****         ssd1306_DrawPixel(x, y, Black);
+ 102              		.loc 1 13 5 is_stmt 1 view .LVU24
+  14:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 103              		.loc 1 14 9 view .LVU25
+ 104 0040 0022     		movs	r2, #0
+ 105 0042 2146     		mov	r1, r4
+ 106 0044 2846     		mov	r0, r5
+ 107 0046 FFF7FEFF 		bl	ssd1306_DrawPixel
+ 108              	.LVL12:
+  16:Drivers/OLED/Src/ssd1306_tests.c ****             x++;
+ 109              		.loc 1 16 9 view .LVU26
+  16:Drivers/OLED/Src/ssd1306_tests.c ****             x++;
+ 110              		.loc 1 16 11 is_stmt 0 view .LVU27
+ 111 004a 002C     		cmp	r4, #0
+ 112 004c E2D1     		bne	.L2
+  16:Drivers/OLED/Src/ssd1306_tests.c ****             x++;
+ 113              		.loc 1 16 21 discriminator 1 view .LVU28
+ 114 004e 7E2D     		cmp	r5, #126
+ 115 0050 E0D8     		bhi	.L2
+  17:Drivers/OLED/Src/ssd1306_tests.c ****         else if((x == 127) && (y < (SSD1306_HEIGHT-1)))
+ 116              		.loc 1 17 13 is_stmt 1 view .LVU29
+  17:Drivers/OLED/Src/ssd1306_tests.c ****         else if((x == 127) && (y < (SSD1306_HEIGHT-1)))
+ 117              		.loc 1 17 14 is_stmt 0 view .LVU30
+ 118 0052 0135     		adds	r5, r5, #1
+ 119              	.LVL13:
+  17:Drivers/OLED/Src/ssd1306_tests.c ****         else if((x == 127) && (y < (SSD1306_HEIGHT-1)))
+ 120              		.loc 1 17 14 view .LVU31
+ 121 0054 EDB2     		uxtb	r5, r5
+ 122              	.LVL14:
+  17:Drivers/OLED/Src/ssd1306_tests.c ****         else if((x == 127) && (y < (SSD1306_HEIGHT-1)))
+ 123              		.loc 1 17 14 view .LVU32
+ 124 0056 E3E7     		b	.L3
+ 125              	.L8:
+  18:Drivers/OLED/Src/ssd1306_tests.c ****             y++;
+ 126              		.loc 1 18 28 discriminator 1 view .LVU33
+ 127 0058 3E2C     		cmp	r4, #62
+ 128 005a DDD8     		bhi	.L4
+  19:Drivers/OLED/Src/ssd1306_tests.c ****         else if((y == (SSD1306_HEIGHT-1)) && (x > 0)) 
+ 129              		.loc 1 19 13 is_stmt 1 view .LVU34
+  19:Drivers/OLED/Src/ssd1306_tests.c ****         else if((y == (SSD1306_HEIGHT-1)) && (x > 0)) 
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 4
+
+
+ 130              		.loc 1 19 14 is_stmt 0 view .LVU35
+ 131 005c 0134     		adds	r4, r4, #1
+ 132              	.LVL15:
+  19:Drivers/OLED/Src/ssd1306_tests.c ****         else if((y == (SSD1306_HEIGHT-1)) && (x > 0)) 
+ 133              		.loc 1 19 14 view .LVU36
+ 134 005e E4B2     		uxtb	r4, r4
+ 135              	.LVL16:
+  19:Drivers/OLED/Src/ssd1306_tests.c ****         else if((y == (SSD1306_HEIGHT-1)) && (x > 0)) 
+ 136              		.loc 1 19 14 view .LVU37
+ 137 0060 DEE7     		b	.L3
+ 138              	.L9:
+  20:Drivers/OLED/Src/ssd1306_tests.c ****             x--;
+ 139              		.loc 1 20 43 discriminator 1 view .LVU38
+ 140 0062 002D     		cmp	r5, #0
+ 141 0064 DAD0     		beq	.L5
+  21:Drivers/OLED/Src/ssd1306_tests.c ****         else
+ 142              		.loc 1 21 13 is_stmt 1 view .LVU39
+  21:Drivers/OLED/Src/ssd1306_tests.c ****         else
+ 143              		.loc 1 21 14 is_stmt 0 view .LVU40
+ 144 0066 013D     		subs	r5, r5, #1
+ 145              	.LVL17:
+  21:Drivers/OLED/Src/ssd1306_tests.c ****         else
+ 146              		.loc 1 21 14 view .LVU41
+ 147 0068 EDB2     		uxtb	r5, r5
+ 148              	.LVL18:
+  21:Drivers/OLED/Src/ssd1306_tests.c ****         else
+ 149              		.loc 1 21 14 view .LVU42
+ 150 006a D9E7     		b	.L3
+ 151              	.L10:
+  31:Drivers/OLED/Src/ssd1306_tests.c ****    
+  32:Drivers/OLED/Src/ssd1306_tests.c ****     HAL_Delay(1000);
+ 152              		.loc 1 32 5 is_stmt 1 view .LVU43
+ 153 006c 4FF47A70 		mov	r0, #1000
+ 154 0070 FFF7FEFF 		bl	HAL_Delay
+ 155              	.LVL19:
+  33:Drivers/OLED/Src/ssd1306_tests.c **** }
+ 156              		.loc 1 33 1 is_stmt 0 view .LVU44
+ 157 0074 70BD     		pop	{r4, r5, r6, pc}
+ 158              		.loc 1 33 1 view .LVU45
+ 159              		.cfi_endproc
+ 160              	.LFE75:
+ 162              		.section	.rodata.ssd1306_TestFonts.str1.4,"aMS",%progbits,1
+ 163              		.align	2
+ 164              	.LC1:
+ 165 0000 466F6E74 		.ascii	"Font 16x26\000"
+ 165      20313678 
+ 165      323600
+ 166 000b 00       		.align	2
+ 167              	.LC2:
+ 168 000c 466F6E74 		.ascii	"Font 11x18\000"
+ 168      20313178 
+ 168      313800
+ 169 0017 00       		.align	2
+ 170              	.LC3:
+ 171 0018 466F6E74 		.ascii	"Font 7x10\000"
+ 171      20377831 
+ 171      3000
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 5
+
+
+ 172 0022 0000     		.align	2
+ 173              	.LC4:
+ 174 0024 466F6E74 		.ascii	"Font 6x8\000"
+ 174      20367838 
+ 174      00
+ 175              		.section	.text.ssd1306_TestFonts,"ax",%progbits
+ 176              		.align	1
+ 177              		.global	ssd1306_TestFonts
+ 178              		.syntax unified
+ 179              		.thumb
+ 180              		.thumb_func
+ 182              	ssd1306_TestFonts:
+ 183              	.LFB76:
+  34:Drivers/OLED/Src/ssd1306_tests.c **** 
+  35:Drivers/OLED/Src/ssd1306_tests.c **** void ssd1306_TestFonts() {
+ 184              		.loc 1 35 26 is_stmt 1 view -0
+ 185              		.cfi_startproc
+ 186              		@ args = 0, pretend = 0, frame = 0
+ 187              		@ frame_needed = 0, uses_anonymous_args = 0
+ 188 0000 08B5     		push	{r3, lr}
+ 189              	.LCFI1:
+ 190              		.cfi_def_cfa_offset 8
+ 191              		.cfi_offset 3, -8
+ 192              		.cfi_offset 14, -4
+  36:Drivers/OLED/Src/ssd1306_tests.c ****     uint8_t y = 0;
+ 193              		.loc 1 36 5 view .LVU47
+ 194              	.LVL20:
+  37:Drivers/OLED/Src/ssd1306_tests.c **** 	ssd1306_Fill(Black);
+ 195              		.loc 1 37 2 view .LVU48
+ 196 0002 0020     		movs	r0, #0
+ 197 0004 FFF7FEFF 		bl	ssd1306_Fill
+ 198              	.LVL21:
+  38:Drivers/OLED/Src/ssd1306_tests.c **** 
+  39:Drivers/OLED/Src/ssd1306_tests.c **** 	#ifdef SSD1306_INCLUDE_FONT_16x26
+  40:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_SetCursor(2, y);
+ 199              		.loc 1 40 5 view .LVU49
+ 200 0008 0021     		movs	r1, #0
+ 201 000a 0220     		movs	r0, #2
+ 202 000c FFF7FEFF 		bl	ssd1306_SetCursor
+ 203              	.LVL22:
+  41:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_WriteString("Font 16x26", Font_16x26, White);
+ 204              		.loc 1 41 5 view .LVU50
+ 205 0010 134A     		ldr	r2, .L13
+ 206 0012 0123     		movs	r3, #1
+ 207 0014 06CA     		ldm	r2, {r1, r2}
+ 208 0016 1348     		ldr	r0, .L13+4
+ 209 0018 FFF7FEFF 		bl	ssd1306_WriteString
+ 210              	.LVL23:
+  42:Drivers/OLED/Src/ssd1306_tests.c ****     y += 26;
+ 211              		.loc 1 42 5 view .LVU51
+  43:Drivers/OLED/Src/ssd1306_tests.c **** 	#endif
+  44:Drivers/OLED/Src/ssd1306_tests.c **** 
+  45:Drivers/OLED/Src/ssd1306_tests.c **** 	#ifdef SSD1306_INCLUDE_FONT_11x18
+  46:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_SetCursor(2, y);
+ 212              		.loc 1 46 5 view .LVU52
+ 213 001c 1A21     		movs	r1, #26
+ 214 001e 0220     		movs	r0, #2
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 6
+
+
+ 215 0020 FFF7FEFF 		bl	ssd1306_SetCursor
+ 216              	.LVL24:
+  47:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_WriteString("Font 11x18", Font_11x18, White);
+ 217              		.loc 1 47 5 view .LVU53
+ 218 0024 104A     		ldr	r2, .L13+8
+ 219 0026 0123     		movs	r3, #1
+ 220 0028 06CA     		ldm	r2, {r1, r2}
+ 221 002a 1048     		ldr	r0, .L13+12
+ 222 002c FFF7FEFF 		bl	ssd1306_WriteString
+ 223              	.LVL25:
+  48:Drivers/OLED/Src/ssd1306_tests.c ****     y += 18;
+ 224              		.loc 1 48 5 view .LVU54
+  49:Drivers/OLED/Src/ssd1306_tests.c **** 	#endif
+  50:Drivers/OLED/Src/ssd1306_tests.c **** 
+  51:Drivers/OLED/Src/ssd1306_tests.c **** 	#ifdef SSD1306_INCLUDE_FONT_7x10
+  52:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_SetCursor(2, y);
+ 225              		.loc 1 52 5 view .LVU55
+ 226 0030 2C21     		movs	r1, #44
+ 227 0032 0220     		movs	r0, #2
+ 228 0034 FFF7FEFF 		bl	ssd1306_SetCursor
+ 229              	.LVL26:
+  53:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_WriteString("Font 7x10", Font_7x10, White);
+ 230              		.loc 1 53 5 view .LVU56
+ 231 0038 0D4A     		ldr	r2, .L13+16
+ 232 003a 0123     		movs	r3, #1
+ 233 003c 06CA     		ldm	r2, {r1, r2}
+ 234 003e 0D48     		ldr	r0, .L13+20
+ 235 0040 FFF7FEFF 		bl	ssd1306_WriteString
+ 236              	.LVL27:
+  54:Drivers/OLED/Src/ssd1306_tests.c ****     y += 10;
+ 237              		.loc 1 54 5 view .LVU57
+  55:Drivers/OLED/Src/ssd1306_tests.c **** 	#endif
+  56:Drivers/OLED/Src/ssd1306_tests.c **** 
+  57:Drivers/OLED/Src/ssd1306_tests.c **** 	#ifdef SSD1306_INCLUDE_FONT_6x8
+  58:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_SetCursor(2, y);
+ 238              		.loc 1 58 5 view .LVU58
+ 239 0044 3621     		movs	r1, #54
+ 240 0046 0220     		movs	r0, #2
+ 241 0048 FFF7FEFF 		bl	ssd1306_SetCursor
+ 242              	.LVL28:
+  59:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_WriteString("Font 6x8", Font_6x8, White);
+ 243              		.loc 1 59 5 view .LVU59
+ 244 004c 0A4A     		ldr	r2, .L13+24
+ 245 004e 0123     		movs	r3, #1
+ 246 0050 06CA     		ldm	r2, {r1, r2}
+ 247 0052 0A48     		ldr	r0, .L13+28
+ 248 0054 FFF7FEFF 		bl	ssd1306_WriteString
+ 249              	.LVL29:
+  60:Drivers/OLED/Src/ssd1306_tests.c **** 	#endif
+  61:Drivers/OLED/Src/ssd1306_tests.c **** 
+  62:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_UpdateScreen();
+ 250              		.loc 1 62 5 view .LVU60
+ 251 0058 FFF7FEFF 		bl	ssd1306_UpdateScreen
+ 252              	.LVL30:
+  63:Drivers/OLED/Src/ssd1306_tests.c **** }
+ 253              		.loc 1 63 1 is_stmt 0 view .LVU61
+ 254 005c 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 7
+
+
+ 255              	.L14:
+ 256 005e 00BF     		.align	2
+ 257              	.L13:
+ 258 0060 00000000 		.word	Font_16x26
+ 259 0064 00000000 		.word	.LC1
+ 260 0068 00000000 		.word	Font_11x18
+ 261 006c 0C000000 		.word	.LC2
+ 262 0070 00000000 		.word	Font_7x10
+ 263 0074 18000000 		.word	.LC3
+ 264 0078 00000000 		.word	Font_6x8
+ 265 007c 24000000 		.word	.LC4
+ 266              		.cfi_endproc
+ 267              	.LFE76:
+ 269              		.section	.rodata.ssd1306_TestFPS.str1.4,"aMS",%progbits,1
+ 270              		.align	2
+ 271              	.LC6:
+ 272 0000 54657374 		.ascii	"Testing...\000"
+ 272      696E672E 
+ 272      2E2E00
+ 273              		.global	__aeabi_i2f
+ 274              		.global	__aeabi_f2d
+ 275              		.global	__aeabi_ui2d
+ 276              		.global	__aeabi_ddiv
+ 277              		.global	__aeabi_d2iz
+ 278 000b 00       		.align	2
+ 279              	.LC7:
+ 280 000c 7E256420 		.ascii	"~%d FPS\000"
+ 280      46505300 
+ 281              		.align	2
+ 282              	.LC5:
+ 283 0014 41424344 		.ascii	"ABCDEFGHIJK\000"
+ 283      45464748 
+ 283      494A4B00 
+ 284              		.section	.text.ssd1306_TestFPS,"ax",%progbits
+ 285              		.align	1
+ 286              		.global	ssd1306_TestFPS
+ 287              		.syntax unified
+ 288              		.thumb
+ 289              		.thumb_func
+ 291              	ssd1306_TestFPS:
+ 292              	.LFB77:
+  64:Drivers/OLED/Src/ssd1306_tests.c **** 
+  65:Drivers/OLED/Src/ssd1306_tests.c **** void ssd1306_TestFPS() {
+ 293              		.loc 1 65 24 is_stmt 1 view -0
+ 294              		.cfi_startproc
+ 295              		@ args = 0, pretend = 0, frame = 80
+ 296              		@ frame_needed = 0, uses_anonymous_args = 0
+ 297 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 298              	.LCFI2:
+ 299              		.cfi_def_cfa_offset 20
+ 300              		.cfi_offset 4, -20
+ 301              		.cfi_offset 5, -16
+ 302              		.cfi_offset 6, -12
+ 303              		.cfi_offset 7, -8
+ 304              		.cfi_offset 14, -4
+ 305 0002 95B0     		sub	sp, sp, #84
+ 306              	.LCFI3:
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 8
+
+
+ 307              		.cfi_def_cfa_offset 104
+  66:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_Fill(White);
+ 308              		.loc 1 66 5 view .LVU63
+ 309 0004 0120     		movs	r0, #1
+ 310 0006 FFF7FEFF 		bl	ssd1306_Fill
+ 311              	.LVL31:
+  67:Drivers/OLED/Src/ssd1306_tests.c ****    
+  68:Drivers/OLED/Src/ssd1306_tests.c ****     uint32_t start = HAL_GetTick();
+ 312              		.loc 1 68 5 view .LVU64
+ 313              		.loc 1 68 22 is_stmt 0 view .LVU65
+ 314 000a FFF7FEFF 		bl	HAL_GetTick
+ 315              	.LVL32:
+ 316 000e 0646     		mov	r6, r0
+ 317              	.LVL33:
+  69:Drivers/OLED/Src/ssd1306_tests.c ****     uint32_t end = start;
+ 318              		.loc 1 69 5 is_stmt 1 view .LVU66
+  70:Drivers/OLED/Src/ssd1306_tests.c ****     int fps = 0;
+ 319              		.loc 1 70 5 view .LVU67
+  71:Drivers/OLED/Src/ssd1306_tests.c ****     char message[] = "ABCDEFGHIJK";
+ 320              		.loc 1 71 5 view .LVU68
+ 321              		.loc 1 71 10 is_stmt 0 view .LVU69
+ 322 0010 2F4B     		ldr	r3, .L18
+ 323 0012 93E80700 		ldm	r3, {r0, r1, r2}
+ 324              	.LVL34:
+ 325              		.loc 1 71 10 view .LVU70
+ 326 0016 14AB     		add	r3, sp, #80
+ 327 0018 03E90700 		stmdb	r3, {r0, r1, r2}
+  72:Drivers/OLED/Src/ssd1306_tests.c ****    
+  73:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_SetCursor(2,0);
+ 328              		.loc 1 73 5 is_stmt 1 view .LVU71
+ 329 001c 0021     		movs	r1, #0
+ 330 001e 0220     		movs	r0, #2
+ 331 0020 FFF7FEFF 		bl	ssd1306_SetCursor
+ 332              	.LVL35:
+  74:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_WriteString("Testing...", Font_11x18, Black);
+ 333              		.loc 1 74 5 view .LVU72
+ 334 0024 2B4A     		ldr	r2, .L18+4
+ 335 0026 0023     		movs	r3, #0
+ 336 0028 06CA     		ldm	r2, {r1, r2}
+ 337 002a 2B48     		ldr	r0, .L18+8
+ 338 002c FFF7FEFF 		bl	ssd1306_WriteString
+ 339              	.LVL36:
+  70:Drivers/OLED/Src/ssd1306_tests.c ****     char message[] = "ABCDEFGHIJK";
+ 340              		.loc 1 70 9 is_stmt 0 view .LVU73
+ 341 0030 0025     		movs	r5, #0
+ 342              	.LVL37:
+ 343              	.L16:
+  75:Drivers/OLED/Src/ssd1306_tests.c ****    
+  76:Drivers/OLED/Src/ssd1306_tests.c ****     do {
+ 344              		.loc 1 76 5 is_stmt 1 discriminator 1 view .LVU74
+ 345              	.LBB2:
+  77:Drivers/OLED/Src/ssd1306_tests.c ****         ssd1306_SetCursor(2, 18);
+ 346              		.loc 1 77 9 discriminator 1 view .LVU75
+ 347 0032 1221     		movs	r1, #18
+ 348 0034 0220     		movs	r0, #2
+ 349 0036 FFF7FEFF 		bl	ssd1306_SetCursor
+ 350              	.LVL38:
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 9
+
+
+  78:Drivers/OLED/Src/ssd1306_tests.c ****         ssd1306_WriteString(message, Font_11x18, Black);
+ 351              		.loc 1 78 9 discriminator 1 view .LVU76
+ 352 003a 264A     		ldr	r2, .L18+4
+ 353 003c 0023     		movs	r3, #0
+ 354 003e 06CA     		ldm	r2, {r1, r2}
+ 355 0040 11A8     		add	r0, sp, #68
+ 356 0042 FFF7FEFF 		bl	ssd1306_WriteString
+ 357              	.LVL39:
+  79:Drivers/OLED/Src/ssd1306_tests.c ****         ssd1306_UpdateScreen();
+ 358              		.loc 1 79 9 discriminator 1 view .LVU77
+ 359 0046 FFF7FEFF 		bl	ssd1306_UpdateScreen
+ 360              	.LVL40:
+  80:Drivers/OLED/Src/ssd1306_tests.c ****        
+  81:Drivers/OLED/Src/ssd1306_tests.c ****         char ch = message[0];
+ 361              		.loc 1 81 9 discriminator 1 view .LVU78
+ 362              		.loc 1 81 14 is_stmt 0 discriminator 1 view .LVU79
+ 363 004a 9DF84440 		ldrb	r4, [sp, #68]	@ zero_extendqisi2
+ 364              	.LVL41:
+  82:Drivers/OLED/Src/ssd1306_tests.c ****         memmove(message, message+1, sizeof(message)-2);
+ 365              		.loc 1 82 9 is_stmt 1 discriminator 1 view .LVU80
+ 366 004e 0A22     		movs	r2, #10
+ 367 0050 0DF14501 		add	r1, sp, #69
+ 368 0054 11A8     		add	r0, sp, #68
+ 369 0056 FFF7FEFF 		bl	memmove
+ 370              	.LVL42:
+  83:Drivers/OLED/Src/ssd1306_tests.c ****         message[sizeof(message)-2] = ch;
+ 371              		.loc 1 83 9 discriminator 1 view .LVU81
+ 372              		.loc 1 83 36 is_stmt 0 discriminator 1 view .LVU82
+ 373 005a 8DF84E40 		strb	r4, [sp, #78]
+  84:Drivers/OLED/Src/ssd1306_tests.c **** 
+  85:Drivers/OLED/Src/ssd1306_tests.c ****         fps++;
+ 374              		.loc 1 85 9 is_stmt 1 discriminator 1 view .LVU83
+ 375              		.loc 1 85 12 is_stmt 0 discriminator 1 view .LVU84
+ 376 005e 0135     		adds	r5, r5, #1
+ 377              	.LVL43:
+  86:Drivers/OLED/Src/ssd1306_tests.c ****         end = HAL_GetTick();
+ 378              		.loc 1 86 9 is_stmt 1 discriminator 1 view .LVU85
+ 379              		.loc 1 86 15 is_stmt 0 discriminator 1 view .LVU86
+ 380 0060 FFF7FEFF 		bl	HAL_GetTick
+ 381              	.LVL44:
+ 382              		.loc 1 86 15 discriminator 1 view .LVU87
+ 383              	.LBE2:
+  87:Drivers/OLED/Src/ssd1306_tests.c ****     } while((end - start) < 5000);
+ 384              		.loc 1 87 12 is_stmt 1 discriminator 1 view .LVU88
+ 385              		.loc 1 87 18 is_stmt 0 discriminator 1 view .LVU89
+ 386 0064 841B     		subs	r4, r0, r6
+ 387              	.LVL45:
+ 388              		.loc 1 87 5 discriminator 1 view .LVU90
+ 389 0066 41F28733 		movw	r3, #4999
+ 390 006a 9C42     		cmp	r4, r3
+ 391 006c E1D9     		bls	.L16
+  88:Drivers/OLED/Src/ssd1306_tests.c ****    
+  89:Drivers/OLED/Src/ssd1306_tests.c ****     HAL_Delay(1000);
+ 392              		.loc 1 89 5 is_stmt 1 view .LVU91
+ 393 006e 4FF47A70 		mov	r0, #1000
+ 394              	.LVL46:
+ 395              		.loc 1 89 5 is_stmt 0 view .LVU92
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 10
+
+
+ 396 0072 FFF7FEFF 		bl	HAL_Delay
+ 397              	.LVL47:
+  90:Drivers/OLED/Src/ssd1306_tests.c **** 
+  91:Drivers/OLED/Src/ssd1306_tests.c ****     char buff[64];
+ 398              		.loc 1 91 5 is_stmt 1 view .LVU93
+  92:Drivers/OLED/Src/ssd1306_tests.c ****     fps = (float)fps / ((end - start) / 1000.0);
+ 399              		.loc 1 92 5 view .LVU94
+ 400              		.loc 1 92 11 is_stmt 0 view .LVU95
+ 401 0076 2846     		mov	r0, r5
+ 402 0078 FFF7FEFF 		bl	__aeabi_i2f
+ 403              	.LVL48:
+ 404 007c FFF7FEFF 		bl	__aeabi_f2d
+ 405              	.LVL49:
+ 406 0080 0646     		mov	r6, r0
+ 407              	.LVL50:
+ 408              		.loc 1 92 11 view .LVU96
+ 409 0082 0F46     		mov	r7, r1
+ 410              		.loc 1 92 39 view .LVU97
+ 411 0084 2046     		mov	r0, r4
+ 412 0086 FFF7FEFF 		bl	__aeabi_ui2d
+ 413              	.LVL51:
+ 414 008a 0022     		movs	r2, #0
+ 415 008c 134B     		ldr	r3, .L18+12
+ 416 008e FFF7FEFF 		bl	__aeabi_ddiv
+ 417              	.LVL52:
+ 418 0092 0246     		mov	r2, r0
+ 419 0094 0B46     		mov	r3, r1
+ 420              		.loc 1 92 22 view .LVU98
+ 421 0096 3046     		mov	r0, r6
+ 422 0098 3946     		mov	r1, r7
+ 423 009a FFF7FEFF 		bl	__aeabi_ddiv
+ 424              	.LVL53:
+ 425              		.loc 1 92 9 view .LVU99
+ 426 009e FFF7FEFF 		bl	__aeabi_d2iz
+ 427              	.LVL54:
+ 428 00a2 0346     		mov	r3, r0
+ 429              	.LVL55:
+  93:Drivers/OLED/Src/ssd1306_tests.c ****     snprintf(buff, sizeof(buff), "~%d FPS", fps);
+ 430              		.loc 1 93 5 is_stmt 1 view .LVU100
+ 431 00a4 0E4A     		ldr	r2, .L18+16
+ 432 00a6 4021     		movs	r1, #64
+ 433 00a8 01A8     		add	r0, sp, #4
+ 434              	.LVL56:
+ 435              		.loc 1 93 5 is_stmt 0 view .LVU101
+ 436 00aa FFF7FEFF 		bl	snprintf
+ 437              	.LVL57:
+  94:Drivers/OLED/Src/ssd1306_tests.c ****    
+  95:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_Fill(White);
+ 438              		.loc 1 95 5 is_stmt 1 view .LVU102
+ 439 00ae 0120     		movs	r0, #1
+ 440 00b0 FFF7FEFF 		bl	ssd1306_Fill
+ 441              	.LVL58:
+  96:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_SetCursor(2, 2);
+ 442              		.loc 1 96 5 view .LVU103
+ 443 00b4 0221     		movs	r1, #2
+ 444 00b6 0846     		mov	r0, r1
+ 445 00b8 FFF7FEFF 		bl	ssd1306_SetCursor
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 11
+
+
+ 446              	.LVL59:
+  97:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_WriteString(buff, Font_11x18, Black);
+ 447              		.loc 1 97 5 view .LVU104
+ 448 00bc 054A     		ldr	r2, .L18+4
+ 449 00be 0023     		movs	r3, #0
+ 450 00c0 06CA     		ldm	r2, {r1, r2}
+ 451 00c2 01A8     		add	r0, sp, #4
+ 452 00c4 FFF7FEFF 		bl	ssd1306_WriteString
+ 453              	.LVL60:
+  98:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_UpdateScreen();
+ 454              		.loc 1 98 5 view .LVU105
+ 455 00c8 FFF7FEFF 		bl	ssd1306_UpdateScreen
+ 456              	.LVL61:
+  99:Drivers/OLED/Src/ssd1306_tests.c **** }
+ 457              		.loc 1 99 1 is_stmt 0 view .LVU106
+ 458 00cc 15B0     		add	sp, sp, #84
+ 459              	.LCFI4:
+ 460              		.cfi_def_cfa_offset 20
+ 461              		@ sp needed
+ 462 00ce F0BD     		pop	{r4, r5, r6, r7, pc}
+ 463              	.L19:
+ 464              		.align	2
+ 465              	.L18:
+ 466 00d0 14000000 		.word	.LC5
+ 467 00d4 00000000 		.word	Font_11x18
+ 468 00d8 00000000 		.word	.LC6
+ 469 00dc 00408F40 		.word	1083129856
+ 470 00e0 0C000000 		.word	.LC7
+ 471              		.cfi_endproc
+ 472              	.LFE77:
+ 474              		.section	.text.ssd1306_TestLine,"ax",%progbits
+ 475              		.align	1
+ 476              		.global	ssd1306_TestLine
+ 477              		.syntax unified
+ 478              		.thumb
+ 479              		.thumb_func
+ 481              	ssd1306_TestLine:
+ 482              	.LFB78:
+ 100:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 101:Drivers/OLED/Src/ssd1306_tests.c **** void ssd1306_TestLine() {
+ 483              		.loc 1 101 25 is_stmt 1 view -0
+ 484              		.cfi_startproc
+ 485              		@ args = 0, pretend = 0, frame = 0
+ 486              		@ frame_needed = 0, uses_anonymous_args = 0
+ 487 0000 10B5     		push	{r4, lr}
+ 488              	.LCFI5:
+ 489              		.cfi_def_cfa_offset 8
+ 490              		.cfi_offset 4, -8
+ 491              		.cfi_offset 14, -4
+ 492 0002 82B0     		sub	sp, sp, #8
+ 493              	.LCFI6:
+ 494              		.cfi_def_cfa_offset 16
+ 102:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 103:Drivers/OLED/Src/ssd1306_tests.c ****   ssd1306_Line(1,1,SSD1306_WIDTH - 1,SSD1306_HEIGHT - 1,White);
+ 495              		.loc 1 103 3 view .LVU108
+ 496 0004 0124     		movs	r4, #1
+ 497 0006 0094     		str	r4, [sp]
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 12
+
+
+ 498 0008 3F23     		movs	r3, #63
+ 499 000a 8122     		movs	r2, #129
+ 500 000c 2146     		mov	r1, r4
+ 501 000e 2046     		mov	r0, r4
+ 502 0010 FFF7FEFF 		bl	ssd1306_Line
+ 503              	.LVL62:
+ 104:Drivers/OLED/Src/ssd1306_tests.c ****   ssd1306_Line(SSD1306_WIDTH - 1,1,1,SSD1306_HEIGHT - 1,White);
+ 504              		.loc 1 104 3 view .LVU109
+ 505 0014 0094     		str	r4, [sp]
+ 506 0016 3F23     		movs	r3, #63
+ 507 0018 2246     		mov	r2, r4
+ 508 001a 2146     		mov	r1, r4
+ 509 001c 8120     		movs	r0, #129
+ 510 001e FFF7FEFF 		bl	ssd1306_Line
+ 511              	.LVL63:
+ 105:Drivers/OLED/Src/ssd1306_tests.c ****   ssd1306_UpdateScreen();
+ 512              		.loc 1 105 3 view .LVU110
+ 513 0022 FFF7FEFF 		bl	ssd1306_UpdateScreen
+ 514              	.LVL64:
+ 106:Drivers/OLED/Src/ssd1306_tests.c ****   return;
+ 515              		.loc 1 106 3 view .LVU111
+ 107:Drivers/OLED/Src/ssd1306_tests.c **** }
+ 516              		.loc 1 107 1 is_stmt 0 view .LVU112
+ 517 0026 02B0     		add	sp, sp, #8
+ 518              	.LCFI7:
+ 519              		.cfi_def_cfa_offset 8
+ 520              		@ sp needed
+ 521 0028 10BD     		pop	{r4, pc}
+ 522              		.cfi_endproc
+ 523              	.LFE78:
+ 525              		.section	.text.ssd1306_TestRectangle,"ax",%progbits
+ 526              		.align	1
+ 527              		.global	ssd1306_TestRectangle
+ 528              		.syntax unified
+ 529              		.thumb
+ 530              		.thumb_func
+ 532              	ssd1306_TestRectangle:
+ 533              	.LFB79:
+ 108:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 109:Drivers/OLED/Src/ssd1306_tests.c **** void ssd1306_TestRectangle() {
+ 534              		.loc 1 109 30 is_stmt 1 view -0
+ 535              		.cfi_startproc
+ 536              		@ args = 0, pretend = 0, frame = 0
+ 537              		@ frame_needed = 0, uses_anonymous_args = 0
+ 538 0000 10B5     		push	{r4, lr}
+ 539              	.LCFI8:
+ 540              		.cfi_def_cfa_offset 8
+ 541              		.cfi_offset 4, -8
+ 542              		.cfi_offset 14, -4
+ 543 0002 82B0     		sub	sp, sp, #8
+ 544              	.LCFI9:
+ 545              		.cfi_def_cfa_offset 16
+ 110:Drivers/OLED/Src/ssd1306_tests.c ****   uint32_t delta;
+ 546              		.loc 1 110 3 view .LVU114
+ 111:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 112:Drivers/OLED/Src/ssd1306_tests.c ****   for(delta = 0; delta < 5; delta ++) {
+ 547              		.loc 1 112 3 view .LVU115
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 13
+
+
+ 548              	.LVL65:
+ 549              		.loc 1 112 13 is_stmt 0 view .LVU116
+ 550 0004 0024     		movs	r4, #0
+ 551              		.loc 1 112 3 view .LVU117
+ 552 0006 10E0     		b	.L23
+ 553              	.LVL66:
+ 554              	.L24:
+ 113:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_DrawRectangle(1 + (5*delta),1 + (5*delta) ,SSD1306_WIDTH-1 - (5*delta),SSD1306_HEIGHT-1
+ 555              		.loc 1 113 5 is_stmt 1 discriminator 3 view .LVU118
+ 556 0008 04EB8402 		add	r2, r4, r4, lsl #2
+ 557 000c D2B2     		uxtb	r2, r2
+ 558 000e 501C     		adds	r0, r2, #1
+ 559 0010 C0B2     		uxtb	r0, r0
+ 560 0012 C2F13F03 		rsb	r3, r2, #63
+ 561 0016 C2F18102 		rsb	r2, r2, #129
+ 562 001a 0121     		movs	r1, #1
+ 563 001c 0091     		str	r1, [sp]
+ 564 001e DBB2     		uxtb	r3, r3
+ 565 0020 D2B2     		uxtb	r2, r2
+ 566 0022 0146     		mov	r1, r0
+ 567 0024 FFF7FEFF 		bl	ssd1306_DrawRectangle
+ 568              	.LVL67:
+ 112:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_DrawRectangle(1 + (5*delta),1 + (5*delta) ,SSD1306_WIDTH-1 - (5*delta),SSD1306_HEIGHT-1
+ 569              		.loc 1 112 29 discriminator 3 view .LVU119
+ 112:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_DrawRectangle(1 + (5*delta),1 + (5*delta) ,SSD1306_WIDTH-1 - (5*delta),SSD1306_HEIGHT-1
+ 570              		.loc 1 112 35 is_stmt 0 discriminator 3 view .LVU120
+ 571 0028 0134     		adds	r4, r4, #1
+ 572              	.LVL68:
+ 573              	.L23:
+ 112:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_DrawRectangle(1 + (5*delta),1 + (5*delta) ,SSD1306_WIDTH-1 - (5*delta),SSD1306_HEIGHT-1
+ 574              		.loc 1 112 18 is_stmt 1 discriminator 1 view .LVU121
+ 112:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_DrawRectangle(1 + (5*delta),1 + (5*delta) ,SSD1306_WIDTH-1 - (5*delta),SSD1306_HEIGHT-1
+ 575              		.loc 1 112 3 is_stmt 0 discriminator 1 view .LVU122
+ 576 002a 042C     		cmp	r4, #4
+ 577 002c ECD9     		bls	.L24
+ 114:Drivers/OLED/Src/ssd1306_tests.c ****   }
+ 115:Drivers/OLED/Src/ssd1306_tests.c ****   ssd1306_UpdateScreen();
+ 578              		.loc 1 115 3 is_stmt 1 view .LVU123
+ 579 002e FFF7FEFF 		bl	ssd1306_UpdateScreen
+ 580              	.LVL69:
+ 116:Drivers/OLED/Src/ssd1306_tests.c ****   return;
+ 581              		.loc 1 116 3 view .LVU124
+ 117:Drivers/OLED/Src/ssd1306_tests.c **** }
+ 582              		.loc 1 117 1 is_stmt 0 view .LVU125
+ 583 0032 02B0     		add	sp, sp, #8
+ 584              	.LCFI10:
+ 585              		.cfi_def_cfa_offset 8
+ 586              		@ sp needed
+ 587 0034 10BD     		pop	{r4, pc}
+ 588              		.loc 1 117 1 view .LVU126
+ 589              		.cfi_endproc
+ 590              	.LFE79:
+ 592              		.section	.text.ssd1306_TestCircle,"ax",%progbits
+ 593              		.align	1
+ 594              		.global	ssd1306_TestCircle
+ 595              		.syntax unified
+ 596              		.thumb
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 14
+
+
+ 597              		.thumb_func
+ 599              	ssd1306_TestCircle:
+ 600              	.LFB80:
+ 118:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 119:Drivers/OLED/Src/ssd1306_tests.c **** void ssd1306_TestCircle() {
+ 601              		.loc 1 119 27 is_stmt 1 view -0
+ 602              		.cfi_startproc
+ 603              		@ args = 0, pretend = 0, frame = 0
+ 604              		@ frame_needed = 0, uses_anonymous_args = 0
+ 605 0000 10B5     		push	{r4, lr}
+ 606              	.LCFI11:
+ 607              		.cfi_def_cfa_offset 8
+ 608              		.cfi_offset 4, -8
+ 609              		.cfi_offset 14, -4
+ 120:Drivers/OLED/Src/ssd1306_tests.c ****   uint32_t delta;
+ 610              		.loc 1 120 3 view .LVU128
+ 121:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 122:Drivers/OLED/Src/ssd1306_tests.c ****   for(delta = 0; delta < 5; delta ++) {
+ 611              		.loc 1 122 3 view .LVU129
+ 612              	.LVL70:
+ 613              		.loc 1 122 13 is_stmt 0 view .LVU130
+ 614 0002 0024     		movs	r4, #0
+ 615              		.loc 1 122 3 view .LVU131
+ 616 0004 0BE0     		b	.L27
+ 617              	.LVL71:
+ 618              	.L28:
+ 123:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_DrawCircle(20* delta+30, 15, 10, White);
+ 619              		.loc 1 123 5 is_stmt 1 discriminator 3 view .LVU132
+ 620 0006 04EB8403 		add	r3, r4, r4, lsl #2
+ 621 000a 9800     		lsls	r0, r3, #2
+ 622 000c 1E30     		adds	r0, r0, #30
+ 623 000e 0123     		movs	r3, #1
+ 624 0010 0A22     		movs	r2, #10
+ 625 0012 0F21     		movs	r1, #15
+ 626 0014 00F0FE00 		and	r0, r0, #254
+ 627 0018 FFF7FEFF 		bl	ssd1306_DrawCircle
+ 628              	.LVL72:
+ 122:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_DrawCircle(20* delta+30, 15, 10, White);
+ 629              		.loc 1 122 29 discriminator 3 view .LVU133
+ 122:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_DrawCircle(20* delta+30, 15, 10, White);
+ 630              		.loc 1 122 35 is_stmt 0 discriminator 3 view .LVU134
+ 631 001c 0134     		adds	r4, r4, #1
+ 632              	.LVL73:
+ 633              	.L27:
+ 122:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_DrawCircle(20* delta+30, 15, 10, White);
+ 634              		.loc 1 122 18 is_stmt 1 discriminator 1 view .LVU135
+ 122:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_DrawCircle(20* delta+30, 15, 10, White);
+ 635              		.loc 1 122 3 is_stmt 0 discriminator 1 view .LVU136
+ 636 001e 042C     		cmp	r4, #4
+ 637 0020 F1D9     		bls	.L28
+ 124:Drivers/OLED/Src/ssd1306_tests.c ****   }
+ 125:Drivers/OLED/Src/ssd1306_tests.c ****   ssd1306_UpdateScreen();
+ 638              		.loc 1 125 3 is_stmt 1 view .LVU137
+ 639 0022 FFF7FEFF 		bl	ssd1306_UpdateScreen
+ 640              	.LVL74:
+ 126:Drivers/OLED/Src/ssd1306_tests.c ****   return;
+ 641              		.loc 1 126 3 view .LVU138
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 15
+
+
+ 127:Drivers/OLED/Src/ssd1306_tests.c **** }
+ 642              		.loc 1 127 1 is_stmt 0 view .LVU139
+ 643 0026 10BD     		pop	{r4, pc}
+ 644              		.loc 1 127 1 view .LVU140
+ 645              		.cfi_endproc
+ 646              	.LFE80:
+ 648              		.section	.text.ssd1306_TestArc,"ax",%progbits
+ 649              		.align	1
+ 650              		.global	ssd1306_TestArc
+ 651              		.syntax unified
+ 652              		.thumb
+ 653              		.thumb_func
+ 655              	ssd1306_TestArc:
+ 656              	.LFB81:
+ 128:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 129:Drivers/OLED/Src/ssd1306_tests.c **** void ssd1306_TestArc() {
+ 657              		.loc 1 129 24 is_stmt 1 view -0
+ 658              		.cfi_startproc
+ 659              		@ args = 0, pretend = 0, frame = 0
+ 660              		@ frame_needed = 0, uses_anonymous_args = 0
+ 661 0000 00B5     		push	{lr}
+ 662              	.LCFI12:
+ 663              		.cfi_def_cfa_offset 4
+ 664              		.cfi_offset 14, -4
+ 665 0002 83B0     		sub	sp, sp, #12
+ 666              	.LCFI13:
+ 667              		.cfi_def_cfa_offset 16
+ 130:Drivers/OLED/Src/ssd1306_tests.c ****   ssd1306_DrawArc(30, 30, 30, 20, 270, White);
+ 668              		.loc 1 130 3 view .LVU142
+ 669 0004 0123     		movs	r3, #1
+ 670 0006 0193     		str	r3, [sp, #4]
+ 671 0008 4FF48773 		mov	r3, #270
+ 672 000c 0093     		str	r3, [sp]
+ 673 000e 1423     		movs	r3, #20
+ 674 0010 1E22     		movs	r2, #30
+ 675 0012 1146     		mov	r1, r2
+ 676 0014 1046     		mov	r0, r2
+ 677 0016 FFF7FEFF 		bl	ssd1306_DrawArc
+ 678              	.LVL75:
+ 131:Drivers/OLED/Src/ssd1306_tests.c ****   ssd1306_UpdateScreen();
+ 679              		.loc 1 131 3 view .LVU143
+ 680 001a FFF7FEFF 		bl	ssd1306_UpdateScreen
+ 681              	.LVL76:
+ 132:Drivers/OLED/Src/ssd1306_tests.c ****   return;
+ 682              		.loc 1 132 3 view .LVU144
+ 133:Drivers/OLED/Src/ssd1306_tests.c **** }
+ 683              		.loc 1 133 1 is_stmt 0 view .LVU145
+ 684 001e 03B0     		add	sp, sp, #12
+ 685              	.LCFI14:
+ 686              		.cfi_def_cfa_offset 4
+ 687              		@ sp needed
+ 688 0020 5DF804FB 		ldr	pc, [sp], #4
+ 689              		.cfi_endproc
+ 690              	.LFE81:
+ 692              		.section	.text.ssd1306_TestPolyline,"ax",%progbits
+ 693              		.align	1
+ 694              		.global	ssd1306_TestPolyline
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 16
+
+
+ 695              		.syntax unified
+ 696              		.thumb
+ 697              		.thumb_func
+ 699              	ssd1306_TestPolyline:
+ 700              	.LFB82:
+ 134:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 135:Drivers/OLED/Src/ssd1306_tests.c **** void ssd1306_TestPolyline() {
+ 701              		.loc 1 135 29 is_stmt 1 view -0
+ 702              		.cfi_startproc
+ 703              		@ args = 0, pretend = 0, frame = 16
+ 704              		@ frame_needed = 0, uses_anonymous_args = 0
+ 705 0000 00B5     		push	{lr}
+ 706              	.LCFI15:
+ 707              		.cfi_def_cfa_offset 4
+ 708              		.cfi_offset 14, -4
+ 709 0002 85B0     		sub	sp, sp, #20
+ 710              	.LCFI16:
+ 711              		.cfi_def_cfa_offset 24
+ 136:Drivers/OLED/Src/ssd1306_tests.c ****   SSD1306_VERTEX loc_vertex[] =
+ 712              		.loc 1 136 3 view .LVU147
+ 713              		.loc 1 136 18 is_stmt 0 view .LVU148
+ 714 0004 084B     		ldr	r3, .L34
+ 715 0006 EC46     		mov	ip, sp
+ 716 0008 0FCB     		ldm	r3, {r0, r1, r2, r3}
+ 717 000a ACE80700 		stmia	ip!, {r0, r1, r2}
+ 718 000e ACF80030 		strh	r3, [ip]	@ movhi
+ 137:Drivers/OLED/Src/ssd1306_tests.c ****   {
+ 138:Drivers/OLED/Src/ssd1306_tests.c ****       {35,40},
+ 139:Drivers/OLED/Src/ssd1306_tests.c ****       {40,20},
+ 140:Drivers/OLED/Src/ssd1306_tests.c ****       {45,28},
+ 141:Drivers/OLED/Src/ssd1306_tests.c ****       {50,10},
+ 142:Drivers/OLED/Src/ssd1306_tests.c ****       {45,16},
+ 143:Drivers/OLED/Src/ssd1306_tests.c ****       {50,10},
+ 144:Drivers/OLED/Src/ssd1306_tests.c ****       {53,16}
+ 145:Drivers/OLED/Src/ssd1306_tests.c ****   };
+ 146:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 147:Drivers/OLED/Src/ssd1306_tests.c ****   ssd1306_Polyline(loc_vertex,sizeof(loc_vertex)/sizeof(loc_vertex[0]),White);
+ 719              		.loc 1 147 3 is_stmt 1 view .LVU149
+ 720 0012 0122     		movs	r2, #1
+ 721 0014 0721     		movs	r1, #7
+ 722 0016 6846     		mov	r0, sp
+ 723 0018 FFF7FEFF 		bl	ssd1306_Polyline
+ 724              	.LVL77:
+ 148:Drivers/OLED/Src/ssd1306_tests.c ****   ssd1306_UpdateScreen();
+ 725              		.loc 1 148 3 view .LVU150
+ 726 001c FFF7FEFF 		bl	ssd1306_UpdateScreen
+ 727              	.LVL78:
+ 149:Drivers/OLED/Src/ssd1306_tests.c ****   return;
+ 728              		.loc 1 149 3 view .LVU151
+ 150:Drivers/OLED/Src/ssd1306_tests.c **** }
+ 729              		.loc 1 150 1 is_stmt 0 view .LVU152
+ 730 0020 05B0     		add	sp, sp, #20
+ 731              	.LCFI17:
+ 732              		.cfi_def_cfa_offset 4
+ 733              		@ sp needed
+ 734 0022 5DF804FB 		ldr	pc, [sp], #4
+ 735              	.L35:
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 17
+
+
+ 736 0026 00BF     		.align	2
+ 737              	.L34:
+ 738 0028 00000000 		.word	.LANCHOR0
+ 739              		.cfi_endproc
+ 740              	.LFE82:
+ 742              		.section	.text.ssd1306_TestAll,"ax",%progbits
+ 743              		.align	1
+ 744              		.global	ssd1306_TestAll
+ 745              		.syntax unified
+ 746              		.thumb
+ 747              		.thumb_func
+ 749              	ssd1306_TestAll:
+ 750              	.LFB83:
+ 151:Drivers/OLED/Src/ssd1306_tests.c **** 
+ 152:Drivers/OLED/Src/ssd1306_tests.c **** void ssd1306_TestAll() {
+ 751              		.loc 1 152 24 is_stmt 1 view -0
+ 752              		.cfi_startproc
+ 753              		@ args = 0, pretend = 0, frame = 0
+ 754              		@ frame_needed = 0, uses_anonymous_args = 0
+ 755 0000 08B5     		push	{r3, lr}
+ 756              	.LCFI18:
+ 757              		.cfi_def_cfa_offset 8
+ 758              		.cfi_offset 3, -8
+ 759              		.cfi_offset 14, -4
+ 153:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_Init();
+ 760              		.loc 1 153 5 view .LVU154
+ 761 0002 FFF7FEFF 		bl	ssd1306_Init
+ 762              	.LVL79:
+ 154:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_TestFPS();
+ 763              		.loc 1 154 5 view .LVU155
+ 764 0006 FFF7FEFF 		bl	ssd1306_TestFPS
+ 765              	.LVL80:
+ 155:Drivers/OLED/Src/ssd1306_tests.c ****     HAL_Delay(3000);
+ 766              		.loc 1 155 5 view .LVU156
+ 767 000a 40F6B830 		movw	r0, #3000
+ 768 000e FFF7FEFF 		bl	HAL_Delay
+ 769              	.LVL81:
+ 156:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_TestBorder();
+ 770              		.loc 1 156 5 view .LVU157
+ 771 0012 FFF7FEFF 		bl	ssd1306_TestBorder
+ 772              	.LVL82:
+ 157:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_TestFonts();
+ 773              		.loc 1 157 5 view .LVU158
+ 774 0016 FFF7FEFF 		bl	ssd1306_TestFonts
+ 775              	.LVL83:
+ 158:Drivers/OLED/Src/ssd1306_tests.c ****     HAL_Delay(3000);
+ 776              		.loc 1 158 5 view .LVU159
+ 777 001a 40F6B830 		movw	r0, #3000
+ 778 001e FFF7FEFF 		bl	HAL_Delay
+ 779              	.LVL84:
+ 159:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_Fill(Black);
+ 780              		.loc 1 159 5 view .LVU160
+ 781 0022 0020     		movs	r0, #0
+ 782 0024 FFF7FEFF 		bl	ssd1306_Fill
+ 783              	.LVL85:
+ 160:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_TestRectangle();
+ 784              		.loc 1 160 5 view .LVU161
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 18
+
+
+ 785 0028 FFF7FEFF 		bl	ssd1306_TestRectangle
+ 786              	.LVL86:
+ 161:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_TestLine();
+ 787              		.loc 1 161 5 view .LVU162
+ 788 002c FFF7FEFF 		bl	ssd1306_TestLine
+ 789              	.LVL87:
+ 162:Drivers/OLED/Src/ssd1306_tests.c ****     HAL_Delay(3000);
+ 790              		.loc 1 162 5 view .LVU163
+ 791 0030 40F6B830 		movw	r0, #3000
+ 792 0034 FFF7FEFF 		bl	HAL_Delay
+ 793              	.LVL88:
+ 163:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_Fill(Black);
+ 794              		.loc 1 163 5 view .LVU164
+ 795 0038 0020     		movs	r0, #0
+ 796 003a FFF7FEFF 		bl	ssd1306_Fill
+ 797              	.LVL89:
+ 164:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_TestPolyline();
+ 798              		.loc 1 164 5 view .LVU165
+ 799 003e FFF7FEFF 		bl	ssd1306_TestPolyline
+ 800              	.LVL90:
+ 165:Drivers/OLED/Src/ssd1306_tests.c ****     HAL_Delay(3000);
+ 801              		.loc 1 165 5 view .LVU166
+ 802 0042 40F6B830 		movw	r0, #3000
+ 803 0046 FFF7FEFF 		bl	HAL_Delay
+ 804              	.LVL91:
+ 166:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_Fill(Black);
+ 805              		.loc 1 166 5 view .LVU167
+ 806 004a 0020     		movs	r0, #0
+ 807 004c FFF7FEFF 		bl	ssd1306_Fill
+ 808              	.LVL92:
+ 167:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_TestArc();
+ 809              		.loc 1 167 5 view .LVU168
+ 810 0050 FFF7FEFF 		bl	ssd1306_TestArc
+ 811              	.LVL93:
+ 168:Drivers/OLED/Src/ssd1306_tests.c ****     HAL_Delay(3000);
+ 812              		.loc 1 168 5 view .LVU169
+ 813 0054 40F6B830 		movw	r0, #3000
+ 814 0058 FFF7FEFF 		bl	HAL_Delay
+ 815              	.LVL94:
+ 169:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_Fill(Black);
+ 816              		.loc 1 169 5 view .LVU170
+ 817 005c 0020     		movs	r0, #0
+ 818 005e FFF7FEFF 		bl	ssd1306_Fill
+ 819              	.LVL95:
+ 170:Drivers/OLED/Src/ssd1306_tests.c ****     ssd1306_TestCircle();
+ 820              		.loc 1 170 5 view .LVU171
+ 821 0062 FFF7FEFF 		bl	ssd1306_TestCircle
+ 822              	.LVL96:
+ 171:Drivers/OLED/Src/ssd1306_tests.c ****     HAL_Delay(3000);
+ 823              		.loc 1 171 5 view .LVU172
+ 824 0066 40F6B830 		movw	r0, #3000
+ 825 006a FFF7FEFF 		bl	HAL_Delay
+ 826              	.LVL97:
+ 172:Drivers/OLED/Src/ssd1306_tests.c **** }
+ 827              		.loc 1 172 1 is_stmt 0 view .LVU173
+ 828 006e 08BD     		pop	{r3, pc}
+ 829              		.cfi_endproc
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 19
+
+
+ 830              	.LFE83:
+ 832              		.section	.rodata
+ 833              		.align	2
+ 834              		.set	.LANCHOR0,. + 0
+ 835              	.LC0:
+ 836 0000 23       		.byte	35
+ 837 0001 28       		.byte	40
+ 838 0002 28       		.byte	40
+ 839 0003 14       		.byte	20
+ 840 0004 2D       		.byte	45
+ 841 0005 1C       		.byte	28
+ 842 0006 32       		.byte	50
+ 843 0007 0A       		.byte	10
+ 844 0008 2D       		.byte	45
+ 845 0009 10       		.byte	16
+ 846 000a 32       		.byte	50
+ 847 000b 0A       		.byte	10
+ 848 000c 35       		.byte	53
+ 849 000d 10       		.byte	16
+ 850              		.text
+ 851              	.Letext0:
+ 852              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 853              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 854              		.file 4 "Drivers/OLED/Inc/ssd1306_fonts.h"
+ 855              		.file 5 "Drivers/OLED/Inc/ssd1306.h"
+ 856              		.file 6 "Drivers/STM32F2xx_HAL_Driver/Inc/stm32f2xx_hal.h"
+ 857              		.file 7 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 858              		.file 8 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ARM GAS  C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s 			page 20
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ssd1306_tests.c
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:18     .text.ssd1306_TestBorder:00000000 $t
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:24     .text.ssd1306_TestBorder:00000000 ssd1306_TestBorder
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:163    .rodata.ssd1306_TestFonts.str1.4:00000000 $d
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:176    .text.ssd1306_TestFonts:00000000 $t
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:182    .text.ssd1306_TestFonts:00000000 ssd1306_TestFonts
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:258    .text.ssd1306_TestFonts:00000060 $d
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:270    .rodata.ssd1306_TestFPS.str1.4:00000000 $d
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:285    .text.ssd1306_TestFPS:00000000 $t
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:291    .text.ssd1306_TestFPS:00000000 ssd1306_TestFPS
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:466    .text.ssd1306_TestFPS:000000d0 $d
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:475    .text.ssd1306_TestLine:00000000 $t
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:481    .text.ssd1306_TestLine:00000000 ssd1306_TestLine
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:526    .text.ssd1306_TestRectangle:00000000 $t
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:532    .text.ssd1306_TestRectangle:00000000 ssd1306_TestRectangle
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:593    .text.ssd1306_TestCircle:00000000 $t
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:599    .text.ssd1306_TestCircle:00000000 ssd1306_TestCircle
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:649    .text.ssd1306_TestArc:00000000 $t
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:655    .text.ssd1306_TestArc:00000000 ssd1306_TestArc
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:693    .text.ssd1306_TestPolyline:00000000 $t
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:699    .text.ssd1306_TestPolyline:00000000 ssd1306_TestPolyline
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:738    .text.ssd1306_TestPolyline:00000028 $d
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:743    .text.ssd1306_TestAll:00000000 $t
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:749    .text.ssd1306_TestAll:00000000 ssd1306_TestAll
+C:\Users\sangt\AppData\Local\Temp\ccSfyXO1.s:833    .rodata:00000000 $d
+
+UNDEFINED SYMBOLS
+ssd1306_Fill
+HAL_GetTick
+ssd1306_DrawPixel
+ssd1306_UpdateScreen
+HAL_Delay
+ssd1306_SetCursor
+ssd1306_WriteString
+Font_16x26
+Font_11x18
+Font_7x10
+Font_6x8
+__aeabi_i2f
+__aeabi_f2d
+__aeabi_ui2d
+__aeabi_ddiv
+__aeabi_d2iz
+memmove
+snprintf
+ssd1306_Line
+ssd1306_DrawRectangle
+ssd1306_DrawCircle
+ssd1306_DrawArc
+ssd1306_Polyline
+ssd1306_Init

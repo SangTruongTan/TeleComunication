@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "ssd1306.h": "c",
+        "my_nrf24.h": "c"
+    }
+}
