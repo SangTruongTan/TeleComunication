@@ -8,7 +8,10 @@
                 "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F2xx/Include",
                 "${workspaceFolder}/Drivers/CMSIS/Core/Include",
                 "${workspaceFolder}/Drivers/OLED/Inc",
-                "${workspaceFolder}/Drivers/NRF24L01/Inc"
+                "${workspaceFolder}/Drivers/Radio/Inc",
+                "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/Source/include",
+                "${workspaceFolder}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3",
+                "${workspaceFolder}/Drivers/RingBuffer/Inc"
             ],
             "defines": [
                 "_DEBUG",
