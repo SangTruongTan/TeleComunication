@@ -410,15 +410,15 @@ void Init_Task(void *pvParamters) {
     Ring.Ring3.enable = true;
     Ring.Ring1.hdma = &hdma_usart1_rx;
     Ring.Ring1.huart = &huart1;
-    Ring.Ring1.hdma = &hdma_usart2_rx;
-    Ring.Ring1.huart = &huart2;
+    Ring.Ring2.hdma = &hdma_usart2_rx;
+    Ring.Ring2.huart = &huart2;
     Ring.Ring3.hdma = &hdma_usart3_rx;
     Ring.Ring3.huart = &huart3;
     Ring.GetTime = xTaskGetTickCount;
     Ring_Init(&Ring);
     // Init for Radio
     Radio.Init.Debug = &Ring.Ring3;
-    Radio.Init.enableDebug = false;
+    Radio.Init.enableDebug = true;
     Radio.Init.nrfInit.CE_Pin = RF_CE_Pin;
     Radio.Init.nrfInit.CSN_Pin = RF_CS_Pin;
     Radio.Init.nrfInit.Port = RF_CS_GPIO_Port;
@@ -426,7 +426,7 @@ void Init_Task(void *pvParamters) {
     Radio.Init.nrfInit.Timeout = 0;
     Radio.Init.nrfInit.wait = vTaskDelay;
     Radio.Init.nrfInit.hspi = &hspi1;
-    Radio.Init.Serial = &Ring.Ring3;
+    Radio.Init.Serial = &Ring.Ring1;
     Radio.Init.Display = &Oled.Display;
     Radio_Init(&Radio, Radio.Init);
     // Init for OLED Display
@@ -437,8 +437,8 @@ void Init_Task(void *pvParamters) {
     Oled.Init.GetTime = xTaskGetTickCount;
     Oled.Init.Wait = vTaskDelay;
     Oled_Init(&Oled);
-    xTaskCreate(&Radio_Task, "Radio", 256, NULL, 2, &RadioTaskHandler);
     xTaskCreate(&Display_Task, "Display", 256, NULL, 3, &DisplayTaskHandler);
+    xTaskCreate(&Radio_Task, "Radio", 512, NULL, 2, &RadioTaskHandler);
     vTaskDelete(InitTaskHandler);
     for (;;) {
     }
@@ -446,11 +446,18 @@ void Init_Task(void *pvParamters) {
 
 void Radio_Task(void *pvParameters) {
     TickType_t StartTask = xTaskGetTickCount();
+    uint8_t Buffer[40];
+    char Terminated = '\n';
     for (;;) {
-        TickType_t Start = xTaskGetTickCount();
         Radio_Process();
-        TickType_t Stop = xTaskGetTickCount();
-        vTaskDelayUntil(&StartTask, 30);
+        if (Detect_Char(Radio.Debug, '\n')) {
+            memset(Buffer, '\0', 40);
+            Get_String_NonBlocking(Radio.Debug, Buffer, '\n');
+            Buffer[strlen((char *)Buffer)] = '\n';
+            HAL_UART_Transmit(Radio.Serial->huart, Buffer,
+                              strlen((char *)Buffer), 100);
+        }
+        // vTaskDelayUntil(&StartTask, 50);
     }
 }
 
