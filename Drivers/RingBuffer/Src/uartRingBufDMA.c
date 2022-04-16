@@ -197,6 +197,11 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
     }
 #endif
     pos = Ring->Head;
+    // Calculate remaining size
+    int Remain = Ring->Tail - Ring->Head;
+    if (Remain <= 0) {
+        Remain += RING_BUFFER_SIZE;
+    }
     // Check if the new data exceeds the remain buffer size
     if (pos + Size > RING_BUFFER_SIZE) {
         uint16_t DataToCopy = RING_BUFFER_SIZE - pos;
@@ -208,6 +213,10 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
     } else {
         memcpy(Ring->MainBuffer + pos, Ring->RxBuffer, Size);
         Ring->Head = pos + Size;
+    }
+    //Increase the Tail pointer above the Head 1
+    if(Size >= Remain) {
+        Ring->Tail = Ring->Head + 1;
     }
     // Start the DMA again
     Ring_Restart_Uart(Ring);
