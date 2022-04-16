@@ -108,6 +108,12 @@ RadioStatus_t Radio_Process() {
         }
         free(RxData);
     }
+    // Check the buffer from the FC interface
+    if (Detect_Char(RadioHandler->Serial, '\n') == true) {
+        // Put the Processing function here. But, don't modify the
+        // RingBuffer.
+        Radio_Process_From_FC();
+    }
     return RADIO_OK;
 }
 
