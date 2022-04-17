@@ -203,7 +203,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
         Remain += RING_BUFFER_SIZE;
     }
     // Check if the new data exceeds the remain buffer size
-    if (pos + Size > RING_BUFFER_SIZE) {
+    if (pos + Size >= RING_BUFFER_SIZE) {
         uint16_t DataToCopy = RING_BUFFER_SIZE - pos;
         memcpy((Ring->MainBuffer + pos), Ring->RxBuffer, DataToCopy);
         pos = 0;
