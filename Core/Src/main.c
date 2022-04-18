@@ -160,9 +160,9 @@ void SystemClock_Config(void) {
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
     RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-    RCC_OscInitStruct.PLL.PLLM = 8;
-    RCC_OscInitStruct.PLL.PLLN = 240;
-    RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+    RCC_OscInitStruct.PLL.PLLM = 4;
+    RCC_OscInitStruct.PLL.PLLN = 192;
+    RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV6;
     RCC_OscInitStruct.PLL.PLLQ = 4;
     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
         Error_Handler();
@@ -176,7 +176,7 @@ void SystemClock_Config(void) {
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
     RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK) {
+    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
         Error_Handler();
     }
 }
@@ -418,7 +418,7 @@ void Init_Task(void *pvParamters) {
     Ring_Init(&Ring);
     // Init for Radio
     Radio.Init.Debug = &Ring.Ring3;
-    Radio.Init.enableDebug = true;
+    Radio.Init.enableDebug = false;
     Radio.Init.nrfInit.CE_Pin = RF_CE_Pin;
     Radio.Init.nrfInit.CSN_Pin = RF_CS_Pin;
     Radio.Init.nrfInit.Port = RF_CS_GPIO_Port;
@@ -446,24 +446,14 @@ void Init_Task(void *pvParamters) {
 
 void Radio_Task(void *pvParameters) {
     TickType_t StartTask = xTaskGetTickCount();
-    uint8_t Buffer[40];
-    char Terminated = '\n';
+    // uint8_t Buffer[40];
     for (;;) {
         Radio_Process();
-        if (Detect_Char(Radio.Debug, '\n')) {
-            memset(Buffer, '\0', 40);
-            Get_String_NonBlocking(Radio.Debug, Buffer, '\n');
-            Buffer[strlen((char *)Buffer)] = '\n';
-            HAL_UART_Transmit(Radio.Serial->huart, Buffer,
-                              strlen((char *)Buffer), 100);
-        }
-        // vTaskDelayUntil(&StartTask, 50);
+        vTaskDelayUntil(&StartTask, 5);
     }
 }
 
 void Display_Task(void *PvParameters) {
-    sprintf(Oled.Display.Mode, "BLOCK");
-    vTaskDelay(1000);
     TickType_t StartTask = xTaskGetTickCount();
     for (;;) {
         Oled_Process();
