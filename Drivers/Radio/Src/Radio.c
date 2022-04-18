@@ -81,13 +81,20 @@ void Radio_Init(RadioHandler_t *Handle, RadioInit_t Init) {
  */
 RadioStatus_t Radio_Process() {
     static uint8_t DataFromRemote[RADIO_MAX_CMD_LENGTH];
+    static uint8_t count = 0;
+    static uint8_t DetecLost = 0;
     if (NRF24_available() == true) {
         uint8_t *RxData;
         RxData = malloc(33);
         memset(RxData, '\0', 33);
         NRF24_read(RxData, 32);
         strcat((char *)DataFromRemote, (char *)RxData);
-        HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+        count++;
+        if (count > 10) {
+            HAL_GPIO_TogglePin(LED2_GPIO_Port, LED2_Pin);
+            count = 0;
+        }
+
         // Process Data From Remote Control
         if (IndexOf(DataFromRemote, '\n', strlen((char *)DataFromRemote)) >=
             0) {
@@ -106,13 +113,20 @@ RadioStatus_t Radio_Process() {
             // Put the parse string and choose the destination here.
             NRF24_writeAckPayload(0, RxData, 32);
         }
+        DetecLost = 0;
         free(RxData);
-    }
-    // Check the buffer from the FC interface
-    if (Detect_Char(RadioHandler->Serial, '\n') == true) {
-        // Put the Processing function here. But, don't modify the
-        // RingBuffer.
-        Radio_Process_From_FC();
+    } else if (Detect_Char(RadioHandler->Serial, '\n') ==
+               true) {  // Check the buffer from the FC interface
+        // Put the Processing function here. Also, Modify the Buffer position.
+        DetecLost++;
+        if (DetecLost > 10) {
+            uint8_t *Buffer;
+            Buffer = malloc(128);
+            Radio_Process_From_FC();
+            Get_String_NonBlocking(RadioHandler->Serial, Buffer, '\n');
+            free(Buffer);
+            DetecLost = 10;
+        }
     }
     return RADIO_OK;
 }
@@ -148,18 +162,20 @@ void Radio_Process_From_FC() {
         int Availabe;
         Buffer = malloc(RADIO_MAX_CMD_LENGTH);
         Temp = malloc(RING_BUFFER_SIZE);
+        memset(Struct, '\0', ROWS * COLUMNS);
+        memset(Buffer, '\0', RADIO_MAX_CMD_LENGTH);
         if (Temp == NULL || Buffer == NULL) return;
         Availabe = Is_available(RadioHandler->Serial);
         if (Availabe > 0) {
             get_peek(RadioHandler->Serial, Temp, Availabe);
             Get_String_Util(Buffer, Temp, '\n', Availabe);
-        }
-        // Put the process with the Parse string function
-        Radio_Control_Parse(Struct, Buffer, ',');
-        if (strcmp((const char *)&Struct[0], "MOD") == 0) {
-            Radio_Decode_Mode(Struct);
-        } else if (strcmp((const char *)&Struct[0], "ACK") == 0) {
-            Radio_Decode_Ack(Struct);
+            // Put the process with the Parse string function
+            Radio_Control_Parse(Struct, Buffer, ',');
+            if (strcmp((const char *)&Struct[0], "MOD") == 0) {
+                Radio_Decode_Mode(Struct);
+            } else if (strcmp((const char *)&Struct[0], "ACK") == 0) {
+                Radio_Decode_Ack(Struct);
+            }
         }
         free(Buffer);
         free(Temp);

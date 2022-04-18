@@ -78,10 +78,14 @@ OLEDStatus_t Oled_Process(void) {
     }
     // Display the data rely selection display
     if (OledHandler->SelectPage == 0) {
-        sprintf(Temp, "Display Page:%d", OledHandler->SelectPage);
+        // Put the information to introduce
+        const char *Info = "DRONE";
+        const char *Info1 = "4G";
         ssd1306_Fill(Black);
-        ssd1306_SetCursor(2, 0);
-        ssd1306_WriteString(Temp, Font_7x10, White);
+        ssd1306_SetCursor(25, 0);
+        ssd1306_WriteString((char *)Info, Font_16x26, White);
+        ssd1306_SetCursor(50, 30);
+        ssd1306_WriteString((char *)Info1, Font_16x26, White);
         ssd1306_UpdateScreen();
     } else if (OledHandler->SelectPage == 1) {
         OLEDDisplay_t dis = OledHandler->Display;
@@ -121,7 +125,7 @@ OLEDStatus_t Oled_Process(void) {
         // Don't forget update the screen
         ssd1306_UpdateScreen();
     }
-    //Put the Page Processing here
+    // Put the Page Processing here
     free(Temp);
     return OLED_OK;
 }
