@@ -38,6 +38,7 @@ typedef struct Joystick_t {
     int Roll;
     int Pitch;
     int Yaw;
+    char Heading;
 } Joystick_t;
 
 typedef struct RollPid_t {

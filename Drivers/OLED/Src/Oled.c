@@ -96,13 +96,21 @@ OLEDStatus_t Oled_Process(void) {
         ssd1306_WriteString(Temp, Font_7x10, White);
         // For data
         sprintf(Temp, "T:%05d R:%05d", dis.Joys.Thrust, dis.Joys.Roll);
-        ssd1306_SetCursor(2, 20);
+        ssd1306_SetCursor(2, 18);
         ssd1306_WriteString(Temp, Font_7x10, White);
         sprintf(Temp, "P:%05d Y:%05d", dis.Joys.Pitch, dis.Joys.Yaw);
-        ssd1306_SetCursor(2, 32);
+        ssd1306_SetCursor(2, 30);
         ssd1306_WriteString(Temp, Font_7x10, White);
         sprintf(Temp, "M:%s B:%02.1fV", dis.Mode, dis.SystemParameters.VBat);
-        ssd1306_SetCursor(2, 44);
+        ssd1306_SetCursor(2, 42);
+        ssd1306_WriteString(Temp, Font_7x10, White);
+        //Heading Display
+        if (OledHandler->Display.Joys.Heading == 'T') {
+            sprintf(Temp, "Heading:ON");
+        } else {
+            sprintf(Temp, "Heading:OFF");
+        }
+        ssd1306_SetCursor(2, 54);
         ssd1306_WriteString(Temp, Font_7x10, White);
         // Don't forget update the screen
         ssd1306_UpdateScreen();

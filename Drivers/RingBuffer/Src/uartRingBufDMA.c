@@ -61,13 +61,14 @@ void Ring_Init(RingBuffer_t *Handle) {
 bool Detect_Char(RingHandler_t *RingHandler, const char Deli) {
     bool retval = false;
     uint8_t *Temp = NULL;
-    int Availabe;
-    Availabe = Is_available(RingHandler);
-    if (Availabe > 0) {
-        Temp = malloc(RING_BUFFER_SIZE);
+    int Available;
+    Available = Is_available(RingHandler);
+    if (Available > 0) {
+        Temp = malloc(Available + 2);
         if (Temp == NULL) return -1;
-        get_peek(RingHandler, Temp, Availabe);
-        int Index = IndexOf(Temp, Deli, Availabe);
+        memset(Temp, '\0', Available + 2);
+        get_peek(RingHandler, Temp, Available);
+        int Index = IndexOf(Temp, Deli, Available);
         if(Index != -1) {
             retval = true;
         }
@@ -335,13 +336,13 @@ int Get_String_NonBlocking(RingHandler_t *Ring, uint8_t *Buffer,
                            const char Terminate) {
     uint8_t *Temp = NULL;
     int Length = -1;
-    int Availabe;
+    int Available;
     Temp = malloc(RING_BUFFER_SIZE);
     if (Temp == NULL) return -1;
-    Availabe = Is_available(Ring);
-    if (Availabe > 0) {
-        get_peek(Ring, Temp, Availabe);
-        Length = Get_String_Util(Buffer, Temp, Terminate, Availabe);
+    Available = Is_available(Ring);
+    if (Available > 0) {
+        get_peek(Ring, Temp, Available);
+        Length = Get_String_Util(Buffer, Temp, Terminate, Available);
         Ring_Increase_Tail(Ring, Length + 1);
     }
     free(Temp);

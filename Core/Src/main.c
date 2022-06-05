@@ -33,6 +33,7 @@
 #include "task.h"
 #include "timers.h"
 #include "uartRingBufDMA.h"
+#include "portable.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -428,6 +429,8 @@ void Init_Task(void *pvParamters) {
     Radio.Init.nrfInit.hspi = &hspi1;
     Radio.Init.Serial = &Ring.Ring1;
     Radio.Init.Display = &Oled.Display;
+    Radio.Init.PortMalloc = pvPortMalloc;
+    Radio.Init.PortFree = vPortFree;
     Radio_Init(&Radio, Radio.Init);
     // Init for OLED Display
     Oled.Init.ControlPin.Port = BTN3_GPIO_Port;
@@ -438,7 +441,7 @@ void Init_Task(void *pvParamters) {
     Oled.Init.Wait = vTaskDelay;
     Oled_Init(&Oled);
     xTaskCreate(&Display_Task, "Display", 256, NULL, 3, &DisplayTaskHandler);
-    xTaskCreate(&Radio_Task, "Radio", 512, NULL, 2, &RadioTaskHandler);
+    xTaskCreate(&Radio_Task, "Radio", 1024, NULL, 2, &RadioTaskHandler);
     vTaskDelete(InitTaskHandler);
     for (;;) {
     }
@@ -446,10 +449,9 @@ void Init_Task(void *pvParamters) {
 
 void Radio_Task(void *pvParameters) {
     TickType_t StartTask = xTaskGetTickCount();
-    // uint8_t Buffer[40];
     for (;;) {
         Radio_Process();
-        vTaskDelayUntil(&StartTask, 5);
+        vTaskDelayUntil(&StartTask, 10);
     }
 }
 

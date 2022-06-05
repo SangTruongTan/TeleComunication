@@ -29,6 +29,9 @@
 #include "main.h"  //To use printf function
 #include "stm32f2xx.h"
 
+/* Private defines _----------------------------------------------------------*/
+#define RADIO_CIRCULAR_BUFFER_SIZE 128
+
 /* Private includes ----------------------------------------------------------*/
 #include "MY_NRF24.h"
 #include "Oled.h"
@@ -41,6 +44,8 @@ typedef struct RadioInit_t {
     bool enableDebug;
     RingHandler_t *Debug;
     OLEDDisplay_t *Display;
+    void *(*PortMalloc)(size_t);
+    void (*PortFree)(void *);
 } RadioInit_t;
 
 typedef enum RadioStatus_t {
@@ -56,6 +61,11 @@ typedef struct RadioHandler_t {
     RingHandler_t *Debug;
     bool enableDebug;
     OLEDDisplay_t *Display;
+    int Head;
+    int Tail;
+    uint8_t Buffer[RADIO_CIRCULAR_BUFFER_SIZE];
+    void *(*PortMalloc)(size_t);
+    void (*PortFree)(void *);
 } RadioHandler_t;
 
 /* Exported constants --------------------------------------------------------*/
@@ -65,5 +75,9 @@ typedef struct RadioHandler_t {
 /* Exported functions prototypes ---------------------------------------------*/
 void Radio_Init(RadioHandler_t *Handle, RadioInit_t Init);
 RadioStatus_t Radio_Process();
+int Radio_Put_String(char *Buffer);
+int Radio_Get_String(uint8_t *Buffer, int Size);
+int Radio_available();
+int Radio_Remain();
 /* Private defines -----------------------------------------------------------*/
 #endif /* __RADIO_H */
